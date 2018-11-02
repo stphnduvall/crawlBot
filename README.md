@@ -12,3 +12,6 @@ The plan is to have it:
 
 I don't think this will be too hard, my only fear is that all the audio files take up a ton of storage that I'm not ready for on my Macbook 😂
 
+I'm following this [tutorial](https://medium.freecodecamp.org/the-ultimate-guide-to-web-scraping-with-node-js-daa2027dcd3)
+
+Right now the master branch is the tutorial, but I will change it to be a different branch once i finish with it.
