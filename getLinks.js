@@ -12,41 +12,23 @@ for (let i = 0; i < books.length; i++) {
   console.log(links[i]);
 }
 
-// This works, but obviously only gets the first link.
-rp(links[0])
-  .then(function(html){
-    console.log($('audio > source', html)[0].attribs.src);
-  })
+var options = {
+  uri: url,
+  transform: function(body) {
+    return cheerio.load(body)
+  }
+};
 
-// This does not work, not sure why.
+// This works, but obviously only gets the first link.
 for (let k = 0; k < links.length; k++) {
-  console.log(k);
-  rp(links)
-  .then(function(html) {
-    console.log($('audio > source', html)[0].attribs.src);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+  rp(links[k])
+    .then(function(html){
+      console.log($('source', html).attr('src'));
+    })
+    .catch(function(err) {
+      console.log(err);
+      // Log the error.
+    });
 }
 
-
-        // for (let i = 0; i < books.length; i++) {
-        //   console.log(url + books[i] + '/#listen-primary')
-
-        //   rp(url + books + '#listen-primary')
-        //     .then(function(html) {
-        //       console.log($('audio', html)[i].attribs.href);
-        //     })
-        //     .catch(function(err) {
-        //       console.log(err);
-        //     })
-        // }
-
-// for (let k = 0; links.length; k++) {
-//   rp(links[1])
-//     .then(function(html) {
-//       console.log($('audio > source', html).attribs);
-//     })
-// }
 
