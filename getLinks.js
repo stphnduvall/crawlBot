@@ -7,28 +7,16 @@ books = require('./getBooks');
 // loops through the array of books and creates an array
 // of links to use with request-promise
 var links = [];
-for (let i = 0; i < books.length; i++) {
-  links.push(url + books[i] + '/#listen-primary')
-  console.log(links[i]);
-}
+books.forEach(b => {
+  links.push(`${url}${b}/1/`);
+});
 
-var options = {
-  uri: url,
-  transform: function(body) {
-    return cheerio.load(body)
-  }
-};
-
-// This works, but obviously only gets the first link.
-for (let k = 0; k < links.length; k++) {
-  rp(links[k])
-    .then(function(html){
+// Uses links to get each website and log the download link
+links.forEach(l => {
+  rp(l)
+    .then(html => {
+      console.log(`Accessing link- ${l}`);
       console.log($('source', html).attr('src'));
     })
-    .catch(function(err) {
-      console.log(err);
-      // Log the error.
-    });
-}
-
-
+    .catch(console.warn);
+});
